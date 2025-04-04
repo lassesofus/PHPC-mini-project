@@ -3,7 +3,7 @@ import sys
 
 import numpy as np
 
-
+#hej
 def load_data(load_dir, bid):
     SIZE = 512
     u = np.zeros((SIZE + 2, SIZE + 2))
