@@ -1,5 +1,7 @@
 from os.path import join
 import sys
+import multiprocessing as mp
+import math
 
 import numpy as np
 
@@ -51,7 +53,14 @@ if __name__ == '__main__':
         N = 1
     else:
         N = int(sys.argv[1])
+        num_process = int(sys.argv[2])
     building_ids = building_ids[:N]
+
+    #static scheduling implementation, same amount of chunks as workers
+    chunk_size = math.ceil(N / num_process)
+
+    #dynamic scheduling implementation, i.e. smaller chunk size, more chunks than workers
+    chunk_size = 
 
     # Load floor plans
     all_u0 = np.empty((N, 514, 514))
@@ -69,6 +78,9 @@ if __name__ == '__main__':
     for i, (u0, interior_mask) in enumerate(zip(all_u0, all_interior_mask)):
         u = jacobi(u0, interior_mask, MAX_ITER, ABS_TOL)
         all_u[i] = u
+    
+    np.save('test_floorplans.npy', all_u)
+
     # Print summary statistics in CSV format
     stat_keys = ['mean_temp', 'std_temp', 'pct_above_18', 'pct_below_15']
     print('building_id, ' + ', '.join(stat_keys))  # CSV header
