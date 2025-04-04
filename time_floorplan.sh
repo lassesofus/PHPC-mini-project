@@ -16,5 +16,8 @@ conda activate 02613
 # Test number of floorplans
 #N = 10
 
-time python simulate.py 10
+#time python simulate.py 12
+
+# parallel implementation test
+time python simulate_parallel.py 12 4 dynamic
 
