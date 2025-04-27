@@ -37,7 +37,7 @@ plt.plot(data['n_proc'], data['speedup'], marker='o', label='Observed speed-up')
 
 # Plot Amdahl's law curves for different parallel fractions.
 # Choose parallel fractions (p) e.g. 90%, 95% and 99%.
-parallel_fractions = [0.93]
+parallel_fractions = [0.91]
 # Create an array for number of processes.
 n_processes = np.arange(1, data['n_proc'].max()+1)
 for p in parallel_fractions:
@@ -50,5 +50,5 @@ plt.xticks(np.arange(0, data['n_proc'].max()+1, 5))
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.savefig("speedup_plot.png", dpi=300)
+plt.savefig("speedup_plot_6.png", dpi=300)
 plt.show()

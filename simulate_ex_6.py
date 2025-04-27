@@ -75,7 +75,7 @@ if __name__ == '__main__':
     print(f"Processing {N} floorplans on {num_processes} processes (chunk size = {chunk_size})")
     
     with Pool(processes=num_processes) as pool:
-        results = pool.imap_unordered(process_floorplan, tasks, chunksize=1)
+        results = pool.map(process_floorplan, tasks, chunksize=1)
         results = list(results)
 
     all_u = np.array(results)
