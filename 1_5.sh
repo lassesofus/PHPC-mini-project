@@ -15,7 +15,7 @@ lscpu
 source /dtu/projects/02613_2025/conda/conda_init.sh
 conda activate 02613
 
-processes_list="1 2 4 8 16 32"
+processes_list="1 2 4 8 16 24 32"
 output_file="1_5_timing_data.txt"
 echo "n_proc,real_time,user_time,sys_time" > $output_file
 
