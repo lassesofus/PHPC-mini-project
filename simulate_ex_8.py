@@ -14,22 +14,12 @@ def load_data(load_dir, bid):
 
 @cuda.jit
 def jacobi_kernel(u_old, u_new, interior_mask):
-    """Single Jacobi sweep over the padded domain.
 
-    Parameters
-    ----------
-    u_old, u_new : 2‑D float32 device arrays of shape (SIZE+2, SIZE+2)
-        Old and new temperature fields with a one‑cell ghost layer.
-    interior_mask : 2‑D bool device array of shape (SIZE, SIZE)
-        True for interior fluid cells (offset by −1 relative to u)."""
+    i, j = cuda.grid(2)
 
-    i, j = cuda.grid(2)  # global indices in the padded array
-
-    # Guard against threads that fall outside the padded domain
     if i >= u_old.shape[0] or j >= u_old.shape[1]:
         return
 
-    # Copy fixed boundary / wall values by default
     val = u_old[i, j]
 
     # Interior nodes live in 1..SIZE inclusive (exclude ghost cells 0 and SIZE+1)
