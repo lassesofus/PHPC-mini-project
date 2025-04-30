@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 # Load the processed floorplans.
 all_u = np.load('test_floorplans.npy')
+print(all_u.shape)
 N = all_u.shape[0]
 
 # Set the grid dimensions (3 rows x 4 columns).
@@ -39,4 +40,4 @@ fig.colorbar(im, cax=cbar_ax, label='Temperature')
 plt.show()
 
 # Optionally, save the figure.
-fig.savefig('floor_plans.png', dpi=300)
+fig.savefig('floor_plans_simulation.png', dpi=300)
