@@ -75,7 +75,7 @@ max_n = max(max(n_proc_static), max(n_proc_dynamic))
 n_vals = np.arange(1, max_n+1)
 
 # Assumed parallel fractions (modify these as needed).
-p_static = 0.90  # e.g., 95% of the work is parallel for static scheduling.
+p_static = 0.91  # e.g., 95% of the work is parallel for static scheduling.
 p_dynamic = 0.93  # e.g., 85% of the work is parallel for dynamic scheduling.
 
 amdahl_static = [amdahl_speedup(n, p_static) for n in n_vals]

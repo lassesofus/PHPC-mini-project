@@ -1,0 +1,109 @@
+Sun Apr 27 20:54:45 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla V100-PCIE-16GB           On  |   00000000:AF:00.0 Off |                    0 |
+| N/A   29C    P0             24W /  250W |       1MiB /  16384MiB |      0%   E. Process |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+GPU total time for 12 buildings: 13.0435 s
+Average per building: 1.0870 s
+
+building_id, mean_temp, std_temp, pct_above_18, pct_below_15
+10000, 3.2901732792585694, 2.8992562011476353, 0.0, 99.78481790893639
+10009, 2.712635086017729, 2.550334450701219, 0.0, 99.95225650819178
+10014, 4.840608787744975, 3.4352048748949673, 0.2463304900144541, 98.99432014820545
+10019, 4.8051500826143485, 3.421516854441088, 0.22787153742077904, 99.06918546098208
+10029, 2.0812906489001106, 2.0898084120360494, 0.0, 99.94282011207258
+10031, 4.178522712932115, 3.1470522353087684, 0.23274312818548745, 99.12205756709778
+10051, 4.413958139324048, 4.5907219265670065, 2.6773909211106215, 94.98677831643896
+10053, 2.357324433317669, 2.246311729200832, 0.0, 99.92727433004231
+10056, 4.748812419749204, 4.700140432311422, 2.92347067517393, 94.42341660358315
+10064, 2.607955227288909, 2.5398198289526768, 0.0, 99.93094661492525
+10075, 4.640413558911865, 4.098354691448011, 1.783190530871831, 96.4777846479993
+10079, 3.963760756664941, 3.267020699093808, 0.0, 99.75608575715046
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 24817918: <testjob> in cluster <dcc> Done
+
+Job <testjob> was submitted from host <gbarlogin1> by user <s185927> in cluster <dcc> at Sun Apr 27 20:54:43 2025
+Job was executed on host(s) <4*n-62-20-4>, in queue <gpuv100>, as user <s185927> in cluster <dcc> at Sun Apr 27 20:54:44 2025
+</zhome/e3/3/139772> was used as the home directory.
+</zhome/e3/3/139772/Desktop/P4HPC/PHPC-mini-project> was used as the working directory.
+Started at Sun Apr 27 20:54:44 2025
+Terminated at Sun Apr 27 20:55:01 2025
+Results reported at Sun Apr 27 20:55:01 2025
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+### General options
+### –- specify queue --
+#BSUB -q gpuv100
+### -- set the job Name --
+#BSUB -J testjob
+### -- ask for number of cores (default: 1) --
+#BSUB -n 4
+### -- Select the resources: 1 gpu in exclusive process mode --
+#BSUB -gpu "num=1:mode=exclusive_process"
+### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now
+#BSUB -W 1:00
+# request 5GB of system-memory
+#BSUB -R "rusage[mem=5GB]"
+### -- set the email address --
+### -- Specify the output and error file. %J is the job-id --
+### -- -o and -e mean append, -oo and -eo mean overwrite --
+#BSUB -o gpu_%J.out
+#BSUB -e gpu_%J.err
+# -- end of LSF options --
+
+nvidia-smi
+# Load the cuda module
+#module load cuda/11.6
+
+
+# Activate your conda environment.
+source /dtu/projects/02613_2025/conda/conda_init.sh
+conda activate 02613
+
+time python simulate_ex_8.py 12
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   15.18 sec.
+    Max Memory :                                 150 MB
+    Average Memory :                             150.00 MB
+    Total Requested Memory :                     20480.00 MB
+    Delta Memory :                               20330.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                7
+    Run time :                                   39 sec.
+    Turnaround time :                            18 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <gpu_24817918.err> for stderr output of this job.
+
