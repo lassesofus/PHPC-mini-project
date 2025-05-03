@@ -1,0 +1,33 @@
+** CUDA API Summary (cudaapisum):
+
+ Time (%)  Total Time (ns)  Num Calls   Avg (ns)   Med (ns)   Min (ns)  Max (ns)   StdDev (ns)              Name            
+ --------  ---------------  ---------  ----------  ---------  --------  ---------  -----------  ----------------------------
+     45.9       6980689939    1220907      5717.6     5608.0      4041    2262704       5253.5  cuLaunchKernel              
+     43.6       6642671370     257100     25836.9    15255.0      7101    2450496      42323.9  cudaMemcpyAsync             
+      4.9        740404412     128538      5760.2     6055.0      4012     908241       2730.6  cudaLaunchKernel            
+      3.1        476189727     257040      1852.6     1836.0      1190      52423        368.2  cudaStreamSynchronize       
+      1.4        218863697     257064       851.4      841.0       468      11065        246.7  cudaStreamIsCapturing_v10000
+      1.0        148647281         10  14864728.1   163675.0     99654  146307819   46185085.2  cudaMalloc                  
+      0.0          6630037         24    276251.5   154451.0    109057    1272447     321259.9  cuModuleLoadData            
+      0.0          2899746          2   1449873.0  1449873.0   1405983    1493763      62069.8  cudaHostAlloc               
+      0.0          2079881         10    207988.1    81188.5     61519     761085     274248.4  cuModuleUnload               
+
+** GPU MemOps Summary (by Time) (gpumemtimesum):
+
+ Time (%)  Total Time (ns)  Count   Avg (ns)  Med (ns)  Min (ns)  Max (ns)  StdDev (ns)      Operation     
+ --------  ---------------  ------  --------  --------  --------  --------  -----------  ------------------
+     99.2        326841359  257040    1271.6    1248.0       864      6177         67.8  [CUDA memcpy DtoH]
+      0.7          2366062      24   98585.9   98943.0     23744    173791      76100.8  [CUDA memcpy HtoD]
+      0.1           322524      36    8959.0   10736.0      3167     17408       4257.7  [CUDA memcpy DtoD]
+      0.0            61248      12    5104.0    4976.0      4513      5728        502.9  [CUDA memset]     
+
+Processing [1_10_out.sqlite] with [/appl/cuda/11.8.0/nsight-systems-2022.4.2/host-linux-x64/reports/gpumemsizesum.py]... 
+
+ ** GPU MemOps Summary (by Size) (gpumemsizesum):
+
+ Total (MB)  Count   Avg (MB)  Med (MB)  Min (MB)  Max (MB)  StdDev (MB)      Operation     
+ ----------  ------  --------  --------  --------  --------  -----------  ------------------
+     53.871      36     1.496     2.114     0.262     2.114        0.885  [CUDA memcpy DtoD]
+     28.312      24     1.180     1.180     0.262     2.097        0.937  [CUDA memcpy HtoD]
+     25.363      12     2.114     2.114     2.114     2.114        0.000  [CUDA memset]     
+      0.836  257040     0.000     0.000     0.000     0.000        0.000  [CUDA memcpy DtoH]
