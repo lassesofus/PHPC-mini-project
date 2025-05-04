@@ -5,8 +5,8 @@
 #BSUB -R "span[hosts=1]"
 #BSUB -R "rusage[mem=4GB]"
 #BSUB -W 1:00
-#BSUB -o logs_outputs/output_%J.log
-#BSUB -e logs_errors/error_%J.err
+#BSUB -o ../logs_outputs/output_%J.log
+#BSUB -e ../logs_errors/error_%J.err
 #BSUB -R "select[model == XeonGold6226R]"
 
 # Initialize Python environment

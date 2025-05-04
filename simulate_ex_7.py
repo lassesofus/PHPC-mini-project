@@ -15,21 +15,6 @@ def load_data(load_dir, bid):
     interior_mask = np.load(join(load_dir, f"{bid}_interior.npy"))
     return u, interior_mask
 
-# @jit(nopython=True) #? parallel=true ?
-# def jacobi(u, interior_mask, max_iter, atol=1e-6):
-#     u = np.copy(u)
-
-#     for i in range(max_iter):
-#         # Compute average of left, right, up and down neighbors, see eq. (1)
-#         u_new = 0.25 * (u[1:-1, :-2] + u[1:-1, 2:] + u[:-2, 1:-1] + u[2:, 1:-1])
-#         u_new_interior = u_new[interior_mask]
-#         delta = np.abs(u[1:-1, 1:-1][interior_mask] - u_new_interior).max()
-#         u[1:-1, 1:-1][interior_mask] = u_new_interior
-
-#         if delta < atol:
-#             break
-#     return u
-
 
 @jit(nopython=True)
 def jacobi(u, interior_mask, max_iter, atol=1e-6):
@@ -70,7 +55,6 @@ def process_floorplan(task):
     return jacobi(u0, interior_mask, max_iter, atol)
 
 if __name__ == '__main__':
-    # Load data
     LOAD_DIR = '/dtu/projects/02613_2025/data/modified_swiss_dwellings/'
     with open(join(LOAD_DIR, 'building_ids.txt'), 'r') as f:
         building_ids = f.read().splitlines()
@@ -78,8 +62,8 @@ if __name__ == '__main__':
     num_processes = int(sys.argv[1])
 
     # Use at most 100 floorplans for experiments.
-    # N = min(len(building_ids), 100) #TODO:
-    N = min(len(building_ids), 10)
+    N = min(len(building_ids), 100)
+    # N = min(len(building_ids), 10)
     building_ids = building_ids[:N]
 
     # Load floor plans
@@ -127,9 +111,3 @@ for idx, key in enumerate(stat_keys):
 plt.tight_layout()
 plt.savefig("sim_ex_7.png")
 plt.show()
-
-
-"""
-run this:
-python simulate_ex_7.py 4
-"""
